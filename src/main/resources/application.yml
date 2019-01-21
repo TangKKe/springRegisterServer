@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: spring-cloud-eureka
+server:
+  port: 8000
+  context-path: /server
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+# 安全认证的配置  
+security:  
+  basic:  
+    enabled: true  
+  user:  
+    name: tangke  # 用户名  
+    password: tangke123   # 用户密码 

@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: spring-cloud-eureka-server02
+  profiles: peer2
+  
+server:
+  port: 8001
+  context-path: /server
+  
+eureka:
+  instance:
+    hostname: peer2
+    preferIpAddress: true # 默认false。应该始终设置为true。如果基于Docker等容器的部署，容器会生成一个随机的主机名，此时DNS不存在该名，无法解析
+  server:
+    enableSelfPreservation: true # 本地调试时可fasle关闭。但生产建议打开，可防止因网络不稳定等原因导致误剔除服务。
+    renewalPercentThreshold: 0.85 # 默认85%
+    # eureka server刷新readCacheMap的时间，注意，client读取的是readCacheMap，这个时间决定了多久会把readWriteCacheMap的缓存更新到readCacheMap上
+     # 默认30秒，eclipse提示默认0应该是错误的，源代码中responseCacheUpdateIntervalMs = 30 * 1000。
+    response-cache-update-interval-ms: 3000
+     # eureka server缓存readWriteCacheMap失效时间，这个只有在这个时间过去后缓存才会失效，失效前不会更新，
+     # 过期后从registry重新读取注册服务信息，registry是一个ConcurrentHashMap。
+     # 由于启用了evict其实就用不太上改这个配置了，默认180s
+    responseCacheAutoExpirationInSeconds: 180
+     # 启用主动失效，并且每次主动失效检测间隔为3s。源码evictionIntervalTimerInMs = 60 * 1000，默认一分钟。
+     # 需要注意的是该配置会打印INFO日志，增加info日志量。
+    evictionIntervalTimerInMs: 60000
+  client:
+    serviceUrl:
+      defaultZone: http://tangke:tangke123@peer1:8000/server/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+# 安全认证的配置  
+security:  
+  basic:  
+    enabled: true  
+  user:  
+    name: tangke  # 用户名  
+    password: tangke123   # 用户密码 
