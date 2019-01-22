@@ -15,5 +15,9 @@ security:
   basic:  
     enabled: true  
   user:  
-    name: tangke  # 用户名  
-    password: tangke123   # 用户密码 
+    name: ENC(JWev2CHglftdZqZcdZ8w1g==)  # 用户名  
+    password: ENC(RXE1bbwAvRhhEVb3egaCJ0yiKKdNP9iB)   # 用户密码 
+#jasypt加密的密匙
+jasypt:
+  encryptor:
+    password: EbfYkitulv73I2p0mXI50JMXoaxZTKJ7

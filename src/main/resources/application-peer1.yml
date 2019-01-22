@@ -26,7 +26,7 @@ eureka:
     evictionIntervalTimerInMs: 60000
   client:
     serviceUrl:
-      defaultZone: http://tangke:tangke123@peer2:8001/server/eureka/
+      defaultZone: ENC(tBleXJk9VHmDw4atgPBcOQ0gWMA2glrNVQhnmllXreS7M5DURdTmYK2KhW8kz0rOQ45JCwjmpNz4MpqksXmSpw==) #加密后url
     fetch-registry: true
     register-with-eureka: true
 # 安全认证的配置  
@@ -34,7 +34,11 @@ security:
   basic:  
     enabled: true  
   user:  
-    name: tangke  # 用户名  
-    password: tangke123   # 用户密码  
+    name: ENC(f9HaxgjPbDnoynhJLzkz9Q==)  # 加密后用户名  
+    password: ENC(NzMTiNB8Rb/Ki+qTtmuB7QCgBMq4J6cj)   # 加密后用户密码
+#jasypt加密的密匙
+jasypt:
+  encryptor:
+    password: EbfYkitulv73I2p0mXI50JMXoaxZTKJ7
 
 
