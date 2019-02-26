@@ -1,16 +1,27 @@
 spring:
   application:
-    name: spring-cloud-eureka-server01
+    name: SpringRegisterCenter-01
   profiles: peer1
-  
+  #开启了安全认证后，spring-boot2.x以上版本这里的密码配置不可少
+  security:  
+    basic:  
+      enabled: true  
+    user:  
+      name: tangke
+      password: tangke123
 server:
   port: 8000
-  context-path: /server
+  context-path: /
  
 eureka:
   instance:
-    hostname: peer1
+    ipAddress: 127.0.0.1
     preferIpAddress: true # 默认false。应该始终设置为true。如果基于Docker等容器的部署，容器会生成一个随机的主机名，此时DNS不存在该名，无法解析
+    instance-id: ${eureka.instance.ipAddress}:${server.port}
+    metadata-map:
+      user:  
+        name: tangke 
+        password: tangke123 
   server:
     enableSelfPreservation: true # 本地调试时可fasle关闭。但生产建议打开，可防止因网络不稳定等原因导致误剔除服务。
     renewalPercentThreshold: 0.85 # 默认85%
@@ -26,17 +37,31 @@ eureka:
     evictionIntervalTimerInMs: 60000
   client:
     serviceUrl:
-      defaultZone: ENC(tBleXJk9VHmDw4atgPBcOQ0gWMA2glrNVQhnmllXreS7M5DURdTmYK2KhW8kz0rOQ45JCwjmpNz4MpqksXmSpw==) #加密后url
+      defaultZone: http://tangke:tangke123@127.0.0.1:8001/eureka/
     fetch-registry: true
     register-with-eureka: true
+#springBootAdmin端点配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+info:
+  app:
+    name: SpringRegisterCenter-01
+    description: SpringRegisterCenter-01
+    version: 1.0.0
 # 安全认证的配置  
 security:  
   basic:  
     enabled: true  
   user:  
-    name: ENC(f9HaxgjPbDnoynhJLzkz9Q==)  # 加密后用户名  
-    password: ENC(NzMTiNB8Rb/Ki+qTtmuB7QCgBMq4J6cj)   # 加密后用户密码
-#jasypt加密的密匙
+    name: tangke
+    password: tangke123
+#jasypt加密的密匙 可用于敏感信息加密
 jasypt:
   encryptor:
     password: EbfYkitulv73I2p0mXI50JMXoaxZTKJ7

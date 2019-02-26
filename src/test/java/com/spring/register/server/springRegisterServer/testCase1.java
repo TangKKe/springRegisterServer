@@ -30,9 +30,9 @@ public class testCase1{
 	
     @org.junit.Test
 	public void testApp() {
-		String encryptString = encryptor.encrypt("http://tangke:tangke123@peer2:8001/server/eureka/");
-		System.out.println("-----encryptString: " + encryptString);
-		System.out.println("-----原文:" + encryptor.decrypt(encryptString));
-		Assert.assertTrue("hahahahha", encryptString.length() > 0);
+//		String encryptString = encryptor.encrypt("http://tangke:tangke123@106.12.85.1:8000/server/eureka/");
+//		System.out.println("-----encryptString: " + encryptString);
+		System.out.println("-----原文:" + encryptor.decrypt("kmLb1Rz3uOwhBE3YusKbTwV6NziehEHFfonrQiQtjA6N5/vTBhmIyhiV3IHCJ9quTQ8ahNdF3s2C7b3aUQALCA=="));
+//		Assert.assertTrue("hahahahha", encryptString.length() > 0);
 	}
 }
